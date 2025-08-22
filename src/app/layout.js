@@ -1,14 +1,10 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
-// import Navbar from '@/components/Navbar'
-// import Footer from '@/components/Footer'
 import { Providers } from './providers'
 import ErrorBoundary from './components/ErrorBoundary'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ToastProvider from './components/ToastProvider'
-// import ToastProvider from '@/components/ToastProvider'
-// import ErrorBoundary from '@/components/ErrorBoundary'
 
 const inter = Inter({ subsets: ['latin'] })
 
