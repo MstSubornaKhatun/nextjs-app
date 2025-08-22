@@ -16,8 +16,9 @@ import {
   ArrowUpIcon,
   ArrowDownIcon
 } from '@heroicons/react/24/outline'
-import LoadingSpinner from '@/app/components/LoadingSpinner'
+// import LoadingSpinner from '@/app/components/LoadingSpinner'
 import toast from 'react-hot-toast'
+import LoadingSpinner from '../components/LoadingSpinner'
 
 export default function DashboardPage() {
   const { data: session, status } = useSession()

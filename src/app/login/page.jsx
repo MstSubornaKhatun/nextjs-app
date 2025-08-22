@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { signIn, signOut, useSession } from 'next-auth/react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
@@ -14,12 +14,19 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [isGoogleLoading, setIsGoogleLoading] = useState(false)
+  const [callbackUrl, setCallbackUrl] = useState('/dashboard')
 
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'
-
   const { data: session, status } = useSession()
+
+  // Get callback URL from URL parameters
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search)
+    const callback = urlParams.get('callbackUrl')
+    if (callback) {
+      setCallbackUrl(callback)
+    }
+  }, [])
 
   // যদি লগইন করা থাকে → সরাসরি redirect
   useEffect(() => {
@@ -154,16 +161,7 @@ export default function LoginPage() {
           </p>
         </div>
 
-        {/* Test Credentials Info */}
-        <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
-          <h3 className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-2">
-            Test Credentials:
-          </h3>
-          <p className="text-xs text-blue-600 dark:text-blue-400">
-            Email: test@example.com<br />
-            Password: password123
-          </p>
-        </div>
+
 
         {/* Login Form */}
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -276,15 +274,7 @@ export default function LoginPage() {
           </p>
         </div>
 
-        {/* Debug Info */}
-        {process.env.NODE_ENV === 'development' && (
-          <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg text-xs">
-            <p><strong>Debug Info:</strong></p>
-            <p>Status: {status}</p>
-            <p>Callback URL: {callbackUrl}</p>
-            <p>Session: {session ? 'Yes' : 'No'}</p>
-          </div>
-        )}
+
       </div>
     </div>
   )

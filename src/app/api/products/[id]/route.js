@@ -1,8 +1,7 @@
 // import { mockProducts, prisma } from '@/app/lib/db'
 import { mockProducts, prisma } from '@/app/lib/db'
 import { NextResponse } from 'next/server'
-// import { prisma } from '@/lib/db'
-// import { mockProducts } from '@/lib/db'
+
 
 export async function GET(request, { params }) {
   const { id } = params
